@@ -43,14 +43,19 @@ var hackathon = {
 		word_list.map((word, index) => {
 			if(MATERIAL_LIB.includes(word.toLowerCase().trim())){
 				if(index < 1) {
-					res[word] = '';
+					res[word] = 'N/A';
 				} else {
-					res[word] = word_list[index-1];
+					res[word] = this.checkNumber(word_list[index-1]);
 				}
 			}
 		})
 
 		return res;
+	},
+	checkNumber: function(str){
+		var res = 'N/A';
+		str = str.replace('%', '').trim();
+		return isNaN(str) ? res : parseInt(str, 10);
 	},
 	checkWash: function(str) {
 		var res = {};
