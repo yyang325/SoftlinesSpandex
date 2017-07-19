@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fabric</title>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https://jqueryui.com/jquery-wp-content/themes/jqueryui.com/style.css">
+  <link rel="stylesheet" href="fabric.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#dialog" ).dialog({
+        autoOpen: false,
+        width:750,
+        height:250,
+        resizable:false
+      });
+
+    $( "#durabilityBar" ).progressbar({
+      value: 20
+    });
+
+    $( "#durabilityBar" ).progressbar({
+      value: 50
+    });
+    $( "#breathabilityBar" ).progressbar({
+      value: 80
+    });
+    $( "#flexabilityBar" ).progressbar({
+      value: 100
+    });
+    $( "#softnessBar" ).progressbar({
+      value: 60
+    });
+    $( "#weightBar" ).progressbar({
+      value: 30
+    });
+
+    $( "#fabricLink" ).on( "click", function() {
+      $( "#dialog" ).dialog( "open" );
+    });
+
+  } );
+  </script>
+</head>
+<body>
+
+<a id="fabricLink" href="javascript:void(0)">Fabric</a>
+ 
+<div id="dialog">
+  <div id="instruction">
+    <span id="washInstruction">Wash Instruction: </span><br/>
+    Machine wash in cold water and air dry (and we don't mean the setting on your dryer). This will help to protect the life of the LYCRA® fibre and the shape of your garment.
+  </div>
+
+  <div class="barItem">
+    <span class="itemText">Durability</span>
+    <div id="durabilityBar" class="bars"></div>
+  </div>
+
+  <div>
+    <span class="itemText">Breathability</span>
+    <div id="breathabilityBar" class="bars"></div>
+  </div>
+
+  <div>
+    <span class="itemText">Softness</span>
+    <div id="softnessBar" class="bars"></div>
+  </div>
+
+  <div>
+    <span class="itemText">Weight (oz)</span>
+    <div id="weightBar" class="bars"></div>
+  </div>
+
+
+</div>
+ 
+ 
+</body>
+</html>
