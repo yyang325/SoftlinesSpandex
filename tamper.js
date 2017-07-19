@@ -7,11 +7,11 @@
 // @match        http://tampermonkey.net/scripts.php
 // @require http://code.jquery.com/jquery-1.12.4.min.js
 // @require http://code.jquery.com/ui/1.12.1/jquery-ui.js
-// @require https://raw.githubusercontent.com/c4leixub/SoftlinesSpandex/master/hackathon.js
+// @require https://raw.githubusercontent.com/yyang325/SoftlinesSpandex/master/hackathon.js
 // @resource styleJQUI http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css
 // @resource styleJQ http://jqueryui.com/jquery-wp-content/themes/jqueryui.com/style.css
-// @resource dialog https://raw.githubusercontent.com/c4leixub/SoftlinesSpandex/master/dialog.html
-// @resource fabricCSS https://raw.githubusercontent.com/c4leixub/SoftlinesSpandex/master/fabric.css
+// @resource dialog https://raw.githubusercontent.com/yyang325/SoftlinesSpandex/master/dialog.html
+// @resource fabricCSS https://raw.githubusercontent.com/yyang325/SoftlinesSpandex/master/fabric.css
 // @grant GM_getResourceText
 // @grant GM_addStyle
 // ==/UserScript==
