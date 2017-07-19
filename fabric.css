@@ -1,0 +1,43 @@
+.ui-button .ui-icon {
+	background-image: url(https://code.jquery.com/ui/1.12.1/themes/base/images/ui-icons_777777_256x240.png);
+}
+
+.ui-widget-header {
+	background:#ffce00;
+}
+
+.ui-dialog-titlebar {
+	border:none;
+	background:none;
+}
+
+.bars {
+	width:300px;
+	height:10px;
+	margin-bottom: 15px;
+	margin-right: 20px;
+}
+
+.barItem {
+	float: left;
+}
+
+.secondCol {
+	padding-left: 20px;
+}
+
+#instruction {
+	float:right;
+	width:350px;
+	margin-right:20px; 
+}
+
+.itemText {
+	font-size: 13px;
+	font-weight: bold;
+}
+
+#washInstruction {
+	font-weight: bold;
+    font-size: 20px;
+}
