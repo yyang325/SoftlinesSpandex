@@ -22,11 +22,39 @@
         window.console.log(message);
     };
 
+    var isFrabicWithNumber = false;
+    var materials = hackathon.retrieveAsinMaterialRelatedInfo()['materials'];
+    console.log('materials are:', materials);
+    if(materials && Object.keys(materials).length > 0){
+        Object.keys(materials).map((m) => {
+            console.log(m);
+            if(materials[m] > 0){
+                isFrabicWithNumber = true;
+            }
+        });
+        console.log('isFrabicWithNumber', isFrabicWithNumber);
+    }
+
+
     $("body").append(GM_getResourceText("dialog"));
     GM_addStyle(GM_getResourceText("styleJQUI")); 
     GM_addStyle(GM_getResourceText("styleJQ")); 
     GM_addStyle(GM_getResourceText("fabricCSS"));
-    $("#clickToContact_feature_div")[0].innerHTML="<a id='fabricLink' href='javascript:void(0)'>Fabric</a>";
+    // $("#clickToContact_feature_div")[0].innerHTML="<a id='fabricLink' href='javascript:void(0)'>Fabric</a>";
+
+    /* is frabic with number, display */
+    var material_list = '';
+    Object.keys(materials).map((m) => {
+        var temp = '';
+        if(isFrabicWithNumber){
+            temp = m + ' ' + materials[m] + '%;  ';
+        } else {
+            temp = m + '; ';
+        }
+        material_list += temp;
+    });
+
+    $("#clickToContact_feature_div")[0].innerHTML="<a id='fabricLink' href='javascript:void(0)'>Fabric: " + material_list + "</a>";
 
     $( "#dialog" ).dialog({
         autoOpen: false,
@@ -59,5 +87,7 @@
         log("test");
         $( "#dialog" ).dialog( "open" );
     });
+
+
 }
-)();
+)(hackathon);
