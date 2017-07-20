@@ -1,0 +1,83 @@
+.ui-button .ui-icon {
+	background-image: url(https://code.jquery.com/ui/1.12.1/themes/base/images/ui-icons_777777_256x240.png);
+}
+
+.ui-widget-header {
+	background:#ffce00;
+}
+
+.ui-dialog-titlebar {
+	border:none;
+	background:none;
+}
+
+.bars {
+	width:300px;
+	height:20px;
+	margin-bottom: 15px;
+	margin-right: 10px;
+}
+
+.barItem {
+	float: left;
+}
+
+.itemText {
+	font-size: 13px;
+}
+
+#barHeader {
+	margin-bottom: 10px;
+}
+
+#instruction {
+	float:right;
+	width:350px;
+
+	height:150px;
+}
+
+#washInstructionHeader {
+	margin-bottom: 15px;	
+}
+
+#left {
+	float:left;
+}
+
+.iconCol {
+	float:left;
+	max-width: 16px;
+	max-height: 16px;
+	padding-right: 20px;
+}
+
+.washIcon {
+	margin-bottom: 30px;
+}
+
+.iTextCol {
+	float:left;
+	width: 120px;
+	padding-right: 15px;
+}
+
+.break {
+	margin-bottom: 70px;
+}
+
+#fabricHeader {
+	margin-top: 50px;
+	margin-bottom: 10px
+}
+
+.fabricType {
+	float:left;
+	width: 20px;
+	padding-right: 50px;
+}
+
+.fabricDesc {
+	float:left;
+	width: 280px;
+}
