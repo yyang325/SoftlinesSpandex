@@ -13,6 +13,138 @@ const WASH_LIB = [
 				];
 const MATERIAL_NA = 0;				
 
+var processor = {
+	cottonFamily: ['cotton', 'corduroy', 'denim', 'flannel', 'seersucker', 'terrycloth', 'velvet', 'active comfort denim','amercian pima cotton', 'biopolished cotton', 'combed cotton', 'egyptian cotton', 'liquid cotton', 'organic cotton', 'pima cotton', 'polished cotton', 'cotton voile', 'cotton lawn'],
+	silkFamily: ['silk', 'satin', 'china silk', 'pongee silk', 'silk satin', 'thai silk', 'tsumugi silk', 'tusseh silk', 'tussah silk'],
+	leatherFamily: ['leather', 'bicast leather', 'pu leather', 'bonded leather', 'full-grain leather', 'leathertte', 'nappa leather', 'patent leather'],
+	woolFamily: ['wool', 'baby combing wool', 'belly wool', 'black wool', 'boiled wool', 'botany wools', 'breech wool', 'britch wool', 'brushed wool', 'carpet wool', 'lamb’s wool', 'linsey woolsey', 'merino wool', 'tropical wool', 'wool crepe', 'woolsy', 'worsted wool'],
+	nylonFamily: ['nylon'],
+	acrylicFamily:['acrylic', 'acrylic fabric'],
+	modalFamily: ['modal'],
+	polyesterFamily: ['polyester', 'polystyrene'],
+	rayonFamily: ['rayon'],
+	spandexFamily: ['spandex', 'elastane', 'lycra'],
+
+	rateMaterials: function(category, materials) {
+		var ratings = [];
+		var elasticity = {"property": "Elasticity", "rating": "Regular"};
+		var breathability = {"property": "Breathability", "rating": "Regular"};
+		var durability = {"property": "Durability", "rating": "Regular"};
+		var smoothness = {"property": "Smoothness", "rating": "Regular"};
+		var warmth = {"property": "Warmth", "rating": "Regular"};
+		var waterproof = {"property": "Waterproof", "rating": "Regular"};
+		
+		function getScore(family, materials) {
+			var score = 0;
+			for(var i = 0; i < family.length; i++) {
+				if (family[i] in materials) {
+					score += parseInt(materials[family[i]]);
+				}
+			}
+			return score;
+		}
+
+		var	cottonFamilyScore = getScore(this.cottonFamily, materials);
+		var silkFamilyScore = getScore(this.silkFamily, materials);
+		var leatherFamilyScore = getScore(this.leatherFamily, materials);
+		var woolFamilyScore = getScore(this.woolFamily, materials);
+		var nylonFamilyScore = getScore(this.nylonFamily, materials);
+		var acrylicFamilyScore = getScore(this.acrylicFamily, materials);
+		var	modalFamilyScore = getScore(this.modalFamily, materials);
+		var polyesterFamilyScore = getScore(this.polyesterFamily, materials);
+		var rayonFamilyScore = getScore(this.rayonFamily, materials);
+		var spandexFamilyScore = getScore(this.spandexFamily, materials);
+
+		if (category == "jeans") {
+			if (spandexFamilyScore >= 2) {
+				elasticity["rating"] = "More";
+			} else if (spandexFamilyScore == 0) {
+				elasticity["rating"] = "Less";
+			}
+			ratings.push(elasticity);
+
+			var breathableScore = woolFamilyScore + cottonFamilyScore + modalFamilyScore + silkFamilyScore;
+			var unbreathableScore = nylonFamilyScore + polyesterFamilyScore + spandexFamilyScore + leatherFamilyScore + rayonFamilyScore;
+
+			console.log(woolFamilyScore);
+			console.log(cottonFamilyScore);
+			console.log(modalFamilyScore);
+			console.log(silkFamilyScore);
+
+			if (breathableScore >= 90) {
+				breathability["rating"] = "More";
+			} else if (unbreathableScore >= 50) {
+				breathability["rating"] = "Less";
+			}
+			ratings.push(breathability);
+
+			var durableScore = leatherFamilyScore + nylonFamilyScore + polyesterFamilyScore + rayonFamilyScore;
+			var undurableScore = spandexFamilyScore;
+
+			if (durableScore >= 50) {
+				durability["rating"] = "More";
+			} else if (undurableScore >= 5) {
+				durability["rating"] = "Less";
+			}
+			ratings.push(durability);
+		}
+
+		if (category == "underwear") {
+			var smoothScore = silkFamilyScore + nylonFamilyScore + woolFamilyScore + spandexFamilyScore;
+			var unsmoothScore = leatherFamilyScore + rayonFamilyScore + polyesterFamilyScore;
+
+			if (smoothScore >= 50) {
+				smoothness["rating"] = "More";
+			} else if (unsmoothScore >= 50) {
+				smoothness["rating"] = "Less";
+			}
+			ratings.push(smoothness);
+
+			var breathableScore = woolFamilyScore + cottonFamilyScore + modalFamilyScore + silkFamilyScore;
+			var unbreathableScore = nylonFamilyScore + polyesterFamilyScore + spandexFamilyScore + leatherFamilyScore + rayonFamilyScore;
+			
+			if (breathableScore >= 90) {
+				breathability["rating"] = "More";
+			} else if (unbreathableScore >= 50) {
+				breathability["rating"] = "Less";
+			}
+			ratings.push(breathability);
+
+			if (spandexFamilyScore >= 2) {
+				elasticity["rating"] = "More";
+			} else if (spandexFamilyScore == 0) {
+				elasticity["rating"] = "Less";
+			}
+			ratings.push(elasticity);
+		}
+
+		if (category == "jacket") {
+			var warmScore = woolFamilyScore + leatherFamilyScore + cottonFamilyScore + acrylicFamilyScore;
+			var unwarmScore = nylonFamilyScore + polyesterFamilyScore + spandexFamilyScore + rayonFamilyScore;
+
+			if (warmScore >= 50) {
+				warmth["rating"] = "More";
+			} else if (unwarmScore >= 50) {
+				unwarm["rating"] = "Less";
+			}
+			ratings.push(warmth);
+
+			var waterproofScore = polyesterFamilyScore + leatherFamilyScore;
+			var nonWaterproofScore = woolFamilyScore + cottonFamilyScore + acrylicFamilyScore + spandexFamilyScore + rayonFamilyScore;
+
+			if (waterproofScore >= 50) {
+				waterproof["rating"] = "More";
+			} else if (nonWaterproofScore >= 50) {
+				nonWaterproofScore = "Less";
+			}
+			ratings.push(waterproof);
+		}
+		return ratings;
+	},
+	processCare: function() {
+	}
+}
+
 var hackathon = {
 	materials: {},
 	wash: {},
@@ -43,24 +175,24 @@ var hackathon = {
 	checkMaterial: function(str) {
 		var res = {};
 
-		var word_list = str.split(" ").map((item) => {
-			return item.replace(',', '').replace(/[\n\r]+/g, '').toLowerCase();
-		});
-		word_list.map((word, index) => {
-			if(MATERIAL_LIB.includes(word.toLowerCase().trim())){
-				if(index < 1) {
-					res[word] = MATERIAL_NA;
-				} else {
-					res[word] = this.checkNumber(word_list[index-1]);
+		var processedStr = str.toLowerCase().replace(/[^a-zA-Z0-9-]/g, " ");
+
+		for (var i = 0; i < MATERIAL_LIB.length; i++) {
+			var reStr = '([1-9][0-9]*)' + '(?:[ -]*)' + '(' + MATERIAL_LIB[i] + ')';
+			var re = new RegExp(reStr, 'g');
+			var matchArr = re.exec(processedStr);
+			if (matchArr != null) {
+				res[matchArr[2]] = matchArr[1];
+			} else {
+				reStr = '(' + MATERIAL_LIB[i] + ')';
+				re = new RegExp(reStr, 'g');
+				matchArr = re.exec(processedStr);
+				if (matchArr != null) {
+					res[matchArr[1]] = MATERIAL_NA;
 				}
 			}
-		})
-
+		}
 		return res;
-	},
-	checkNumber: function(str){
-		str = str.replace('%', '').trim();
-		return isNaN(str) ? MATERIAL_NA : parseInt(str, 10);
 	},
 	checkWash: function(str) {
 		var res = {};
@@ -80,4 +212,5 @@ var hackathon = {
 	},
 }
 
-hackathon.retrieveAsinMaterialRelatedInfo();
+var h = hackathon.retrieveAsinMaterialRelatedInfo();
+var p = processor.rateMaterials("jeans", h.materials);
