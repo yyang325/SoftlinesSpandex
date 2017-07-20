@@ -1,3 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fabric</title>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https://jqueryui.com/jquery-wp-content/themes/jqueryui.com/style.css">
+  <link rel="stylesheet" href="fabric.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#dialog" ).dialog({
+        autoOpen: false,
+        width:750,
+        height:350,
+        resizable:false
+      });
+
+    $( "#barOne" ).progressbar({
+        value: 20
+    });
+
+    $( "#barTwo" ).progressbar({
+        value: 50
+    });
+    $( "#barThree" ).progressbar({
+        value: 80
+    });
+
+    $( "#fabricLink" ).on( "click", function() {
+      $( "#dialog" ).dialog( "open" );
+    });
+
+  } );
+  </script>
+</head>
+<body>
+
+<a id="fabricLink" href="javascript:void(0)">Fabric</a>
+ 
 <div id="dialog">
   
   <div id="left">
@@ -28,48 +70,52 @@
       <span id="washInstruction">Wash Instruction: </span>
     </div>
 
-    <div class="block">
-      <img src="https://raw.githubusercontent.com/c4leixub/SoftlinesSpandex/master/icon/wh-washing-30deg-alt.png"
-            class="washIcon">
-      </img>
+    <div>
+      <div class="iconCol">
+        <img src="icon/wh-washing-30deg-alt.png" class="washIcon"></img>
+      </div>
 
       <div class="iTextCol">
         <span>Machine Wash Normal / Cold</span>
       </div>
-      
-      <img src="https://raw.githubusercontent.com/c4leixub/SoftlinesSpandex/master/icon/wh-drying-tumble.png"
-           class="washIcon">
-      </img>
+    </div>
+
+    <div class="break">
+      <div class="iconCol">
+        <img src="icon/wh-drying-tumble.png" class="washIcon"></img>
+      </div>
 
       <div class="iTextCol">
         <span>Tumble Dry Normal</span>
       </div>
-    
     </div>
 
-    <div class="block">
-      <img src="https://raw.githubusercontent.com/c4leixub/SoftlinesSpandex/master/icon/wh-ironing.png"
-           class="washIcon">
-      </img>
+    <div>
+      <div class="iconCol">
+        <img src="icon/wh-ironing.png" class="washIcon"></img>
+      </div>
 
       <div class="iTextCol">
         <span>Iron Any Temperature</span>
       </div>
+    </div>
 
-      <img src="https://raw.githubusercontent.com/c4leixub/SoftlinesSpandex/master/icon/wh-bleaching-not-allowed.png"
-           class="washIcon">
-      </img>
+    <div>
+      <div class="iconCol">
+        <img src="icon/wh-bleaching-not-allowed.png" class="washIcon"></img>
+      </div>
 
       <div class="iTextCol">
         <span>Do Not Bleach</span>
       </div>
     </div>
+    <br/>
 
     <div id="fabricHeader">
       <span id="fabricText">Fabric </span>
     </div>
 
-    <div class="class="block"">
+    <div class="break">
       <div class="fabricType">
         <span class="fabricTypeText">Cotton 100%</span>
       </div>
@@ -91,3 +137,7 @@
   </div>
 
 </div>
+ 
+ 
+</body>
+</html>
