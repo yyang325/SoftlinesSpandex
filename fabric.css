@@ -11,11 +11,16 @@
 	background:none;
 }
 
+#dialog {
+	font-family: "Amazon Ember",Arial,sans-serif;
+}
+
 .bars {
 	width:300px;
 	height:20px;
 	margin-bottom: 15px;
 	margin-right: 10px;
+	height: 30px;
 }
 
 .barItem {
@@ -24,10 +29,16 @@
 
 .itemText {
 	font-size: 13px;
+	font-weight: bold;
 }
 
 #barHeader {
 	margin-bottom: 10px;
+}
+
+.headers {
+	font-size: 15px;
+	font-weight: bold;
 }
 
 #instruction {
@@ -69,6 +80,7 @@
 }
 
 #fabricHeader {
+	margin-top: 10px;
 	margin-bottom: 10px
 }
 
@@ -85,4 +97,5 @@
 
 .block {
 	display: inline-block;
+	height: 40px;
 }
