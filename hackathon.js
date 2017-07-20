@@ -161,6 +161,7 @@ var hackathon = {
 				this.materials = (Object.keys(this.materials).length === 0 && Object.keys(materialList).length > 0) ? materialList : this.materials;
 				this.wash = (Object.keys(this.wash).length === 0 && Object.keys(washRes).length > 0) ? this.checkWash(feature_text) : this.wash;
 				this.material_info_index = (Object.keys(this.materials).length === 0 && Object.keys(materialList).length > 0) ? this.material_info_index : i;
+				if(this.materials_info_index > 0) console.log('dom index',this.materials_info_index);
 			});
 		} catch (e) {
 			console.log(e);
