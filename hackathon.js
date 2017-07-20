@@ -9,7 +9,7 @@ const MATERIAL_LIB = ['abaca','aba','acetate','acrylic fabric','acrylic','admira
 const WASH_LIB = [	
 					'machine wash',
 					'hand wash',
-					'dry wash',
+					'dry clean',
 				];
 const MATERIAL_NA = 0;				
 
@@ -148,10 +148,11 @@ var processor = {
 var hackathon = {
 	materials: {},
 	wash: {},
+	material_info_index: -1,
 	retrieveAsinMaterialRelatedInfo: function(){
 		try {
 			var doms = document.getElementById(FEATURE_BULLETS_DIV).getElementsByTagName(FEATURE_LI_TAG);
-			var features = [].slice.call(doms).map((dom) => {
+			var features = [].slice.call(doms).map((dom, i) => {
 				
 				var feature_text = dom.innerText;
 				var materialList = hackathon.checkMaterial(feature_text);
@@ -159,6 +160,7 @@ var hackathon = {
 
 				this.materials = (Object.keys(this.materials).length === 0 && Object.keys(materialList).length > 0) ? materialList : this.materials;
 				this.wash = (Object.keys(this.wash).length === 0 && Object.keys(washRes).length > 0) ? this.checkWash(feature_text) : this.wash;
+				this.material_info_index = (Object.keys(this.materials).length === 0 && Object.keys(materialList).length > 0) ? this.material_info_index : i;
 			});
 		} catch (e) {
 			console.log(e);
