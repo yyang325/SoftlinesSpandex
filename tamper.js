@@ -7,9 +7,9 @@
 // @match        http://tampermonkey.net/scripts.php
 // @require http://code.jquery.com/jquery-1.12.4.min.js
 // @require http://code.jquery.com/ui/1.12.1/jquery-ui.js
-// @require https://raw.githubusercontent.com/yyang325/SoftlinesSpandex/master/hackathon.js
 // @resource styleJQUI http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css
 // @resource styleJQ http://jqueryui.com/jquery-wp-content/themes/jqueryui.com/style.css
+// @require https://raw.githubusercontent.com/yyang325/SoftlinesSpandex/master/hackathon.js
 // @resource dialog https://raw.githubusercontent.com/yyang325/SoftlinesSpandex/master/dialog.html
 // @resource fabricCSS https://raw.githubusercontent.com/yyang325/SoftlinesSpandex/master/fabric.css
 // @grant GM_getResourceText
@@ -21,11 +21,17 @@
     var log = function(message) {
         window.console.log(message);
     };
-    console.log('hackathon object:', hackathon);
-    console.log('hackathon object index:', hackathon.index);
+
+    //var obj = processor.getFinalResult();
+    log("sdfasdf");
+    log("dsfasdf" + processor.getFinalResult());
 
     // dummy json
-    var obj = JSON.parse('{ "bars": [ { "property": "Breathability", "rating": "Less" }, { "property": "Elasticity", "rating": "Regular" }, { "property": "Durability", "rating": "More" } ], "instruction": [ { "iconLink": "https://raw.githubusercontent.com/c4leixub/SoftlinesSpandex/master/icon/wh-drying-tumble.png", "description": "Tumble Dry Normal" }, { "iconLink": "https://raw.githubusercontent.com/c4leixub/SoftlinesSpandex/master/icon/wh-washing-30deg-alt.png", "description": "Machine Wash Normal / Cold" }, { "iconLink": "https://raw.githubusercontent.com/c4leixub/SoftlinesSpandex/master/icon/wh-ironing.png", "description": "Iron Any Temperature" }, { "iconLink": "https://raw.githubusercontent.com/c4leixub/SoftlinesSpandex/master/icon/wh-bleaching-not-allowed.png", "description": "Do Not Bleach" } ], "fabric": [ { "type": "Cotton", "percentage": "98", "description": "Cotton can be ironed at relatively high temperatures" }, { "type": "Spandex", "percentage": "2", "description": "A lightweight synthetic fiber that is used to make stretchable clothing such as sportswear" } ] }');
+    var obj = JSON.parse('{ "bars": [ { "property": "Breathability", "rating": "Less", "index": 0}, { "property": "Elasticity", "rating": "Regular", "index": 1 }, { "property": "Durability", "rating": "More", "index": 2 } ], "instruction": [ { "iconLink": "https://raw.githubusercontent.com/c4leixub/SoftlinesSpandex/master/icon/wh-drying-tumble.png", "description": "Tumble Dry Normal" }, { "iconLink": "https://raw.githubusercontent.com/c4leixub/SoftlinesSpandex/master/icon/wh-washing-30deg-alt.png", "description": "Machine Wash Normal / Cold" }, { "iconLink": "https://raw.githubusercontent.com/c4leixub/SoftlinesSpandex/master/icon/wh-ironing.png", "description": "Iron Any Temperature" }, { "iconLink": "https://raw.githubusercontent.com/c4leixub/SoftlinesSpandex/master/icon/wh-bleaching-not-allowed.png", "description": "Do Not Bleach" } ], "fabric": [ { "type": "Cotton", "percentage": "98", "description": "Cotton can be ironed at relatively high temperatures" }, { "type": "Spandex", "percentage": "2", "description": "A lightweight synthetic fiber that is used to make stretchable clothing such as sportswear" } ] }');
+
+    obj = processor.getFinalResult();
+    log("obj is");
+    log(obj);
 
     var isFrabicWithNumber = false;
     var materials = hackathon.retrieveAsinMaterialRelatedInfo()['materials'];
@@ -67,7 +73,7 @@
         for(var i = 0; i < hackathon.index.length; i++){
             (function(bi){
                 $('#feature-bullets li').eq(bi).remove();
-            })(i)
+            })(i);
         }
     }
 
@@ -76,30 +82,39 @@
     $( "#dialog" ).dialog({
         autoOpen: false,
         width:750,
-        height:350,
+        height:320,
         resizable:false
     });
 
     // The bar
+    var p = JSON.parse('{ "styles": [ { "paddingLeft": "0%;", "width": "33%;", "ratingPaddingLeft": "12%;" }, { "paddingLeft": "33%;", "width": "50%;", "ratingPaddingLeft": "42%;" }, { "paddingLeft": "66%;", "width": "100%;", "ratingPaddingLeft": "79%;" } ] }');
+
     var itemId = ["#itemOne", "#itemTwo", "#itemThree"];
     var bars = obj.bars;
     var i;
     for (i = 0; i < bars.length; i++) {
-        // log(bars[i]);
         $(itemId[i]).html(bars[i].property);
+
+        $("#barDiv"+(i+1)).attr("style", "padding-left: " + p.styles[bars[i].index].paddingLeft);
+        $("#barDiv"+(i+1)+" .a-meter-bar").attr("style", "width: " + p.styles[bars[i].index].width);
+
+        $("#rate"+(i+1)).html(bars[i].rating);
+        $("#rate"+(i+1)).attr("style", "padding-left: " + p.styles[bars[i].index].ratingPaddingLeft);
     }
 
     // Wash instruction
     var instruction = obj.instruction;
-    log(i);
-    log(instruction);
     for (i = 0; i < instruction.length; i++) {
         $("#img"+(i+1)).attr("src",instruction[i].iconLink);
-        //log($("#desc"+(i+1)));
         $("#desc"+(i+1)).html(instruction[i].description);
     }
-    
-        
+    while (i < 4) {
+        $("#img"+(i+1)).attr("style","visibility: hidden;");
+        $("#desc"+(i+1)).attr("style","visibility: hidden;");
+        i++;
+    }
+
+
     // Fabric
     var instructionDiv = $("#instruction"), fabric = obj.fabric, html='';
     for (i = 0; i < fabric.length; i++) {
@@ -107,11 +122,11 @@
         html = '<div class="block"> <div class="fabricType"> <span class="fabricTypeText">' + fabric[i].type + " " + fabric[i].percentage + '%</span> </div> <div class="fabricDesc"> <span class="fabricDescText">' + fabric[i].description + '</span> </div> </div>';
         instructionDiv.append(html);
     }
-    
-    
+
+
     $( "#fabricLink" ).on( "click", function() {
         log("test");
         $( "#dialog" ).dialog( "open" );
     });
 }
-)();
+)(hackathon);
