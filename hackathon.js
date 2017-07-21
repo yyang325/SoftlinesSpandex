@@ -330,7 +330,7 @@ var processor = {
 	},
 	getFinalResult: function() {
 		var h = hackathon.retrieveAsinMaterialRelatedInfo();
-		var bars = this.rateMaterials(h.getCategory(), h.materials);
+		var bars = this.rateMaterials(hackathon.getCategory(), h.materials);
 		var instruction = this.getCares(h.materials, h.cares);
 		var fabric = this.getFabricList(h.materials);
 		return {
