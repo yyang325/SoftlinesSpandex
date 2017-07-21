@@ -46,14 +46,14 @@ var processor = {
 
 	fabricDescriptions: {
 		'silk': 'May yellow and fade with the use of a high iron setting',
-		'leather': 'Leather needs to breathe，don\'t store in a plastic bag or overly heated area.',
-		'wool': 'Fibers will cling together when wool is improperly washed, causing the garment to shrink.',
-		'nylon': 'Nylon can be machine-washed on a warm temperature and tumble dried at low temperatures.',
+		'leather': 'Leather needs to breathe，don\'t store in bags or overly heated area.',
+		'wool': 'Fibers will cling when improperly washed, causing the garment to shrink.',
+		'nylon': 'Machine-washed on a warm temperature and tumble dried at low temperatures.',
 		'acrylic': 'Machine washable and dryable. Quick drying.',
 		'modal': 'Machine washable.',
-		'polyester': 'Polyester can be machine washed on a warm temperature and dried at a low temperature.',
+		'polyester': 'Machine washed on a warm temperature and dried at a low temperature.',
 		'rayon': 'Rayon does not melt but burns at high temperatures.',
-		'spandex': 'The first time the garment is washed, use cold water. Hang to dry. No bleach and iron.'
+		'spandex': 'Use cold water the first time. Hang to dry. No bleach and iron.'
 	},
 
 	getScore: function(family, materials) {
