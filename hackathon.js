@@ -355,7 +355,7 @@ var hackathon = {
 	getCategory: function() {
 		console.log("I am in getCategory");
 		var text = document.getElementById('breadcrumb-back-link').innerText.toLowerCase();
-		if (text.includes('jeans')) {
+		if (text.includes('jeans') || text.includes('jean')) {
 			return 'jeans';
 		}
 		if (text.includes('underwear')) {
