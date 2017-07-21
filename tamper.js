@@ -21,6 +21,7 @@
     var log = function(message) {
         window.console.log(message);
     };
+    console.log('hackathon object:', hackathon);
 
     var isFrabicWithNumber = false;
     var materials = hackathon.retrieveAsinMaterialRelatedInfo()['materials'];
@@ -32,7 +33,10 @@
                 isFrabicWithNumber = true;
             }
         });
-        console.log('isFrabicWithNumber', isFrabicWithNumber);
+    }
+
+    function toTitleCase(str){
+        return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
     }
 
 
@@ -53,8 +57,13 @@
         }
         material_list += temp;
     });
+    //if frabic with number delete related bullet
+    if(isFrabicWithNumber) {
+        console.log('removing');
+        $('#feature-bullets li').eq(hackathon.index).remove();
+    }
 
-    $("#clickToContact_feature_div")[0].innerHTML="<a id='fabricLink' href='javascript:void(0)'>Fabric: " + material_list + "</a>";
+    $("#clickToContact_feature_div")[0].innerHTML="<div class='a-section a-spacing-small fitZoneContainer'><label class='aok-inline-block'>Fabric: </label><a id='fabricLink' href='javascript:void(0)' style='margin-left: 4px;'>" + toTitleCase(material_list) + "</a></div>";
 
     $( "#dialog" ).dialog({
         autoOpen: false,
@@ -90,4 +99,4 @@
 
 
 }
-)(hackathon);
+)();
