@@ -449,3 +449,5 @@ var hackathon = {
 		return res;
 	},
 }
+var h = hackathon.retrieveAsinMaterialRelatedInfo();
+var p = processor.rateMaterials("jeans", h.materials);
