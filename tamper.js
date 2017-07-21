@@ -62,7 +62,7 @@
     $( "#dialog" ).dialog({
         autoOpen: false,
         width:750,
-        height:250,
+        height:350,
         resizable:false
     });
 
