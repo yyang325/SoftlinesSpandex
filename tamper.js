@@ -22,6 +22,7 @@
         window.console.log(message);
     };
     console.log('hackathon object:', hackathon);
+    console.log('hackathon object index:', hackathon.index);
 
     // dummy json
     var obj = JSON.parse('{ "bars": [ { "property": "Breathability", "rating": "Less" }, { "property": "Elasticity", "rating": "Regular" }, { "property": "Durability", "rating": "More" } ], "instruction": [ { "iconLink": "https://raw.githubusercontent.com/c4leixub/SoftlinesSpandex/master/icon/wh-drying-tumble.png", "description": "Tumble Dry Normal" }, { "iconLink": "https://raw.githubusercontent.com/c4leixub/SoftlinesSpandex/master/icon/wh-washing-30deg-alt.png", "description": "Machine Wash Normal / Cold" }, { "iconLink": "https://raw.githubusercontent.com/c4leixub/SoftlinesSpandex/master/icon/wh-ironing.png", "description": "Iron Any Temperature" }, { "iconLink": "https://raw.githubusercontent.com/c4leixub/SoftlinesSpandex/master/icon/wh-bleaching-not-allowed.png", "description": "Do Not Bleach" } ], "fabric": [ { "type": "Cotton", "percentage": "98", "description": "Cotton can be ironed at relatively high temperatures" }, { "type": "Spandex", "percentage": "2", "description": "A lightweight synthetic fiber that is used to make stretchable clothing such as sportswear" } ] }');
@@ -53,7 +54,7 @@
     var material_list = '';
     Object.keys(materials).map((m) => {
         var temp = '';
-        if(isFrabicWithNumber){
+        if(materials[m] > 0){
             temp = m + ' ' + materials[m] + '%;  ';
         } else {
             temp = m + '; ';
@@ -62,8 +63,12 @@
     });
     //if frabic with number delete related bullet
     if(isFrabicWithNumber) {
-        console.log('removing');
-        $('#feature-bullets li').eq(hackathon.index).remove();
+        console.log('removing index', hackathon.index);
+        for(var i = 0; i < hackathon.index.length; i++){
+            (function(bi){
+                $('#feature-bullets li').eq(bi).remove();
+            })(i)
+        }
     }
 
     $("#clickToContact_feature_div")[0].innerHTML="<div class='a-section a-spacing-small fitZoneContainer'><label class='aok-inline-block'>Fabric: </label><a id='fabricLink' href='javascript:void(0)' style='margin-left: 4px;'>" + toTitleCase(material_list) + "</a></div>";
