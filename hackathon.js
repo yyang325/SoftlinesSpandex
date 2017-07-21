@@ -148,7 +148,7 @@ var processor = {
 var hackathon = {
 	materials: {},
 	wash: {},
-	index: -1,
+	index: [],
 	retrieveAsinMaterialRelatedInfo: function(){
 		try {
 			var doms = document.getElementById(FEATURE_BULLETS_DIV).getElementsByTagName(FEATURE_LI_TAG);
@@ -157,9 +157,15 @@ var hackathon = {
 				var materialList = hackathon.checkMaterial(feature_text);
 				var washRes = hackathon.checkWash(feature_text);
 
-				if(Object.keys(this.materials).length === 0 && Object.keys(materialList).length > 0){
-					this.materials = materialList;
-					this.index = i;
+				if(Object.keys(materialList).length > 0){
+					// this.materials = materialList;
+					Object.keys(materialList).map((key) => {
+						//if this.materials contains key already, check if it has number
+						if(!this.materials[key] || this.materials[key] === 0){
+							this.materials[key] = materialList[key];
+						}
+					});
+					this.index.push(i);
 				}
 
 				if(Object.keys(this.wash).length === 0 && Object.keys(washRes).length > 0){
