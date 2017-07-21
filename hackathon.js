@@ -66,6 +66,7 @@ var processor = {
 		return score;
 	},
 	rateMaterials: function(category, materials) {
+		console.log('this is retematerials method in processor method', category, materials);
 		var ratings = [];
 		var elasticity = {"property": "Elasticity", "rating": "Regular", "index":1};
 		var breathability = {"property": "Breathability", "rating": "Regular", "index":1};
@@ -195,6 +196,8 @@ var processor = {
 		return ratings;
 	},
 	getCares: function(materials, cares) {
+		console.log('this is get care method in processor object', materials, cares);
+		console.log('dryCares is', dryCares, '\nthis.dryCares is', this.dryCares);
 		var leatherFamilyScore = this.getScore(this.leatherFamily, materials);
 		var woolFamilyScore = this.getScore(this.woolFamily, materials);
 		var nylonFamilyScore = this.getScore(this.nylonFamily, materials);
