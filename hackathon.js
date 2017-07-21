@@ -197,7 +197,7 @@ var processor = {
 	},
 	getCares: function(materials, cares) {
 		console.log('this is get care method in processor object', materials, cares);
-		console.log('dryCares is', dryCares, '\nthis.dryCares is', this.dryCares);
+		// console.log('dryCares is', dryCares, '\nthis.dryCares is', this.dryCares);
 		var leatherFamilyScore = this.getScore(this.leatherFamily, materials);
 		var woolFamilyScore = this.getScore(this.woolFamily, materials);
 		var nylonFamilyScore = this.getScore(this.nylonFamily, materials);
@@ -208,19 +208,19 @@ var processor = {
 			cares['iron'] = ironCares[2];
 		}
 		if (woolFamilyScore >= 80) {
-			cares['dry'] = dryCares[2];
+			cares['dry'] = this.dryCares[2];
 		}
 		if (nylonFamilyScore >= 30) {
 			cares['wash'] = washCares[1];
-			cares['dry'] = dryCares[1];
+			cares['dry'] = this.dryCares[1];
 			cares['iron'] = ironCares[1];
 		}
 		if (modalFamilyScore >= 50) {
-			cares['dry'] = dryCares[1];
+			cares['dry'] = this.dryCares[1];
 			cares['bleach'] = bleachCares[0];
 		}
 		if (polyesterFamilyScore >= 50) {
-			cares['dry'] = dryCares[1];
+			cares['dry'] = this.dryCares[1];
 			cares['iron'] = ironCares[1];
 		}
 
