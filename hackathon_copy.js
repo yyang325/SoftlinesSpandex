@@ -27,21 +27,21 @@ var processor = {
 	bleachCares: ['Do Not Bleach'],
 
 	careLinks: {
-		'Machine Wash': 'https://raw.githubusercontent.com/yyang325/SoftlinesSpandex/master/icon/wh-washing.png',
-		'Machine Wash / Cold Only': 'https://raw.githubusercontent.com/yyang325/SoftlinesSpandex/master/icon/wh-washing-30deg.png',
-		'No Machine Wash': 'https://raw.githubusercontent.com/yyang325/SoftlinesSpandex/master/icon/wh-washing-not-allowed.png',
+		'Machine Wash': 'https://github.com/yyang325/SoftlinesSpandex/blob/master/icon/wh-washing.png',
+		'Machine Wash / Cold Only': 'https://github.com/yyang325/SoftlinesSpandex/blob/master/icon/wh-washing-30deg.png',
+		'No Machine Wash': 'https://github.com/yyang325/SoftlinesSpandex/blob/master/icon/wh-washing-not-allowed.png',
 
-		'Tumble Dry': 'https://raw.githubusercontent.com/yyang325/SoftlinesSpandex/master/icon/wh-drying-tumble.png',
-		'Tumble Dry / Low Temperature': 'https://raw.githubusercontent.com/yyang325/SoftlinesSpandex/master/icon/wh-drying-tumble-low-heat.png',
-		'Dry Clean': 'https://raw.githubusercontent.com/yyang325/SoftlinesSpandex/master/icon/wh-drycleaning.png',
-		'Dry Clean Only': 'https://raw.githubusercontent.com/yyang325/SoftlinesSpandex/master/icon/wh-drycleaning-p.png',
+		'Tumble Dry': 'https://github.com/yyang325/SoftlinesSpandex/blob/master/icon/wh-drying-tumble.png',
+		'Tumble Dry / Low Temperature': 'https://github.com/yyang325/SoftlinesSpandex/blob/master/icon/wh-drying-tumble-low-heat.png',
+		'Dry Clean': 'https://github.com/yyang325/SoftlinesSpandex/blob/master/icon/wh-drycleaning.png',
+		'Dry Clean Only': 'https://github.com/yyang325/SoftlinesSpandex/blob/master/icon/wh-drycleaning-p.png',
 
-		'Can Be Ironed': 'https://raw.githubusercontent.com/yyang325/SoftlinesSpandex/master/icon/wh-ironing.png',
-		'Ironing / Low Temperature': 'https://raw.githubusercontent.com/yyang325/SoftlinesSpandex/master/icon/wh-ironing-low.png',
-		'No Ironing': 'https://raw.githubusercontent.com/yyang325/SoftlinesSpandex/master/icon/wh-drying-tumble-not-allowed.png',
+		'Can Be Ironed': 'https://github.com/yyang325/SoftlinesSpandex/blob/master/icon/wh-ironing.png',
+		'Ironing / Low Temperature': 'https://github.com/yyang325/SoftlinesSpandex/blob/master/icon/wh-ironing-low.png',
+		'No Ironing': 'https://github.com/yyang325/SoftlinesSpandex/blob/master/icon/wh-drying-tumble-not-allowed.png',
 
-		'Can Bleach': 'https://raw.githubusercontent.com/yyang325/SoftlinesSpandex/master/icon/wh-bleaching.png',
-		'Do Not Bleach': 'https://raw.githubusercontent.com/yyang325/SoftlinesSpandex/master/icon/wh-bleaching-not-allowed.png'
+		'Can Bleach': 'https://github.com/yyang325/SoftlinesSpandex/blob/master/icon/wh-bleaching.png',
+		'Do Not Bleach': 'https://github.com/yyang325/SoftlinesSpandex/blob/master/icon/wh-bleaching-not-allowed.png'
 	},
 
 	fabricDescriptions: {
