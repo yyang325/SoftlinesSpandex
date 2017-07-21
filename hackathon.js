@@ -328,6 +328,17 @@ var processor = {
 		}
 		res.sort(compare);
 		return res;
+	},
+	getFinalResult: function() {
+		var h = hackathon.retrieveAsinMaterialRelatedInfo();
+		var bars = this.rateMaterials("jeans", h.materials);
+		var instruction = this.getCares(h.materials, h.cares);
+		var fabric = this.getFabricList(h.materials);
+		return {
+			'bars': bars,
+			'instruction': instruction,
+			'fabric': fabric
+		}
 	}
 }
 
@@ -341,6 +352,9 @@ var hackathon = {
 	ironCares: ['Can Be Ironed', 'Ironing / Low Temperature', 'No Ironing'],
 	bleachCares: ['Do Not Bleach'],
 
+	getCategory: function() {
+
+	},
 	retrieveAsinMaterialRelatedInfo: function(){
 		try {
 			var doms = document.getElementById(FEATURE_BULLETS_DIV).getElementsByTagName(FEATURE_LI_TAG);
@@ -435,6 +449,3 @@ var hackathon = {
 		return res;
 	},
 }
-
-var h = hackathon.retrieveAsinMaterialRelatedInfo();
-var p = processor.rateMaterials("jeans", h.materials);
