@@ -67,16 +67,12 @@
     });
 
     // The bar
-    var barId = ["#barOne", "#barTwo", "#barThree"];
     var itemId = ["#itemOne", "#itemTwo", "#itemThree"];
     var bars = obj.bars;
     var i;
     for (i = 0; i < bars.length; i++) {
         // log(bars[i]);
-        $(barId[i]).progressbar({
-            value: 20
-        });
-        $(itemId[i]).innerHTML=bars[i].property;
+        $(itemId[i]).html(bars[i].property);
     }
 
     // Wash instruction
