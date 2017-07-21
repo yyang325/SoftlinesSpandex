@@ -282,7 +282,6 @@ var processor = {
 
 		var res = [];
 		var createdFabric = createFabric(this.silkFamily, silkFamilyScore, 33, materials, this.fabricDescriptions);
-		console.log(createdFabric.length);
 		if (Object.keys(createdFabric).length != 0) {
 			res.push(createdFabric);
 		}
@@ -331,7 +330,7 @@ var processor = {
 	},
 	getFinalResult: function() {
 		var h = hackathon.retrieveAsinMaterialRelatedInfo();
-		var bars = this.rateMaterials("jeans", h.materials);
+		var bars = this.rateMaterials(h.getCategory(), h.materials);
 		var instruction = this.getCares(h.materials, h.cares);
 		var fabric = this.getFabricList(h.materials);
 		return {
@@ -344,7 +343,7 @@ var processor = {
 
 var hackathon = {
 	materials: {},
-	index: [],
+	index: -1,
 	cares: {},
 
 	washCares: ['Machine Wash', 'Machine Wash / Cold Only', "No Machine Wash"],
@@ -353,7 +352,17 @@ var hackathon = {
 	bleachCares: ['Do Not Bleach'],
 
 	getCategory: function() {
-
+		var text = document.getElementById('breadcrumb-back-link').innerText.toLowerCase();
+		if (text.includes('jeans')) {
+			return 'jeans';
+		}
+		if (text.includes('underwear')) {
+			return 'underwear';
+		}
+		if (text.includes('jacket')) {
+			return 'jacket';
+		}
+		return '';
 	},
 	retrieveAsinMaterialRelatedInfo: function(){
 		try {
@@ -363,15 +372,9 @@ var hackathon = {
 				var materialList = hackathon.checkMaterial(feature_text);
 				var careRes = hackathon.checkCares(feature_text);
 
-				if(Object.keys(materialList).length > 0){
-					// this.materials = materialList;
-					Object.keys(materialList).map((key) => {
-						//if this.materials contains key already, check if it has number
-						if(!this.materials[key] || this.materials[key] === 0){
-							this.materials[key] = materialList[key];
-						}
-					});
-					this.index.push(i);
+				if(Object.keys(this.materials).length === 0 && Object.keys(materialList).length > 0){
+					this.materials = materialList;
+					this.index = i;
 				}
 
 				if(Object.keys(this.cares).length === 0 && Object.keys(careRes).length > 0){
@@ -417,7 +420,6 @@ var hackathon = {
 
 	checkCares: function(str) {
 		var res = {};
-		console.log('hello');
 		var processedStr = str.toLowerCase().replace(/[^a-zA-Z0-9-]/g, " ");
 
 		var defaultCares = [this.washCares[0], this.dryCares[0], this.ironCares[0]];
