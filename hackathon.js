@@ -343,7 +343,7 @@ var processor = {
 
 var hackathon = {
 	materials: {},
-	index: -1,
+	index: [],
 	cares: {},
 
 	washCares: ['Machine Wash', 'Machine Wash / Cold Only', "No Machine Wash"],
