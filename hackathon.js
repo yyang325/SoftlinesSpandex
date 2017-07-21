@@ -199,13 +199,15 @@ var processor = {
 	getCares: function(materials, cares) {
 		console.log('this is get care method in processor object', materials, cares);
 		console.log('this.dryCares is', this.dryCares);
-		console.log('dryCares', dryCares);
+		// console.log('dryCares', dryCares);
 		var leatherFamilyScore = this.getScore(this.leatherFamily, materials);
 		var woolFamilyScore = this.getScore(this.woolFamily, materials);
 		var nylonFamilyScore = this.getScore(this.nylonFamily, materials);
 		var	modalFamilyScore = this.getScore(this.modalFamily, materials);
 		var polyesterFamilyScore = this.getScore(this.polyesterFamily, materials);
 
+
+		console.log('start check score');
 		if (leatherFamilyScore >= 30) {
 			cares['iron'] = this.ironCares[2];
 		}
