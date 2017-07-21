@@ -342,16 +342,6 @@ var hackathon = {
 	bleachCares: ['Do Not Bleach'],
 
 	getCategory: function() {
-		var text = document.getElementById('breadcrumb-back-link').innerText.toLowerCase();
-		if (text.includes('jeans')) {
-			return 'jeans';
-		}
-		if (text.includes('underwear')) {
-			return 'underwear';
-		}
-		if (text.includes('jacket')) {
-			return 'jacket';
-		}
 		return '';
 	},
 	
