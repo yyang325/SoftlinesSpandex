@@ -305,7 +305,7 @@ var processor = {
 		if (Object.keys(createdFabric).length != 0) {
 			res.push(createdFabric);
 		}
-		createdFabric = createFabric(this.polyesterFamily, polyesterFamilyScore, 33, materials, this.fabricDescriptions);
+		createdFabric = createFabric(this.polyesterFamily, polyesterFamilyScore, 20, materials, this.fabricDescriptions);
 		if (Object.keys(createdFabric).length != 0) {
 			res.push(createdFabric);
 		}
