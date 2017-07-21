@@ -57,7 +57,6 @@ var processor = {
 	},
 
 	getScore: function(family, materials) {
-		console.log('getScroe method begin', family, materials);
 		var score = 0;
 		for(var i = 0; i < family.length; i++) {
 			if (family[i] in materials) {
@@ -197,9 +196,6 @@ var processor = {
 		return ratings;
 	},
 	getCares: function(materials, cares) {
-		console.log('this is get care method in processor object', materials, cares);
-		console.log('this.dryCares is', this.dryCares);
-		// console.log('dryCares', dryCares);
 		var leatherFamilyScore = this.getScore(this.leatherFamily, materials);
 		var woolFamilyScore = this.getScore(this.woolFamily, materials);
 		var nylonFamilyScore = this.getScore(this.nylonFamily, materials);
@@ -207,7 +203,6 @@ var processor = {
 		var polyesterFamilyScore = this.getScore(this.polyesterFamily, materials);
 
 
-		console.log('start check score');
 		if (leatherFamilyScore >= 30) {
 			cares['iron'] = this.ironCares[2];
 		}
@@ -227,7 +222,6 @@ var processor = {
 			cares['dry'] = this.dryCares[1];
 			cares['iron'] = this.ironCares[1];
 		}
-		console.log('check score finished');
 
 		var res = [];
 		var singleCare = {};
@@ -237,7 +231,6 @@ var processor = {
 			res.push(singleCare);
 
 		}
-		console.log('singleCare 1');
 		singleCare = {};
 		if ('dry' in cares) {
 			singleCare['iconLink'] = this.careLinks[cares['dry']];
@@ -245,21 +238,18 @@ var processor = {
 			res.push(singleCare);
 
 		}
-console.log('singleCare 2');
 		singleCare = {};
 		if ('iron' in cares) {
 			singleCare['iconLink'] = this.careLinks[cares['iron']];
 			singleCare['description'] = cares['iron'];
 			res.push(singleCare);
 		}
-console.log('singleCare 3');
 		singleCare = {};
 		if ('bleach' in cares) {
 			singleCare['iconLink'] = this.careLinks[cares['bleach']];
 			singleCare['description'] = cares['bleach']
 			res.push(singleCare);
 		}
-		console.log('getCare method res', res);
 		return res;
 	},
 
