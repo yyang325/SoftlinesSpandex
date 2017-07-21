@@ -6,7 +6,7 @@ const MATERIAL_LIB = ['abaca','aba','acetate','acrylic fabric','acrylic','admira
 					'bicast leather','bonded leather','full-grain leather','nappa leather','patent leather','leather',
 					'denim',
 					];
-const MATERIAL_NA = 0;	
+const MATERIAL_NA = 0;				
 
 var processor = {
 
@@ -282,6 +282,7 @@ var processor = {
 
 		var res = [];
 		var createdFabric = createFabric(this.silkFamily, silkFamilyScore, 33, materials, this.fabricDescriptions);
+		console.log(createdFabric.length);
 		if (Object.keys(createdFabric).length != 0) {
 			res.push(createdFabric);
 		}
@@ -327,17 +328,6 @@ var processor = {
 		}
 		res.sort(compare);
 		return res;
-	},
-	getFinalResult: function() {
-		var h = hackathon.retrieveAsinMaterialRelatedInfo();
-		var bars = this.rateMaterials(hackathon.getCategory(), h.materials);
-		var instruction = this.getCares(h.materials, h.cares);
-		var fabric = this.getFabricList(h.materials);
-		return {
-			'bars': bars,
-			'instruction': instruction,
-			'fabric': fabric
-		}
 	}
 }
 
@@ -351,19 +341,6 @@ var hackathon = {
 	ironCares: ['Can Be Ironed', 'Ironing / Low Temperature', 'No Ironing'],
 	bleachCares: ['Do Not Bleach'],
 
-	getCategory: function() {
-		var text = document.getElementById('breadcrumb-back-link').innerText.toLowerCase();
-		if (text.includes('jeans')) {
-			return 'jeans';
-		}
-		if (text.includes('underwear')) {
-			return 'underwear';
-		}
-		if (text.includes('jacket')) {
-			return 'jacket';
-		}
-		return '';
-	},
 	retrieveAsinMaterialRelatedInfo: function(){
 		try {
 			var doms = document.getElementById(FEATURE_BULLETS_DIV).getElementsByTagName(FEATURE_LI_TAG);
@@ -426,6 +403,7 @@ var hackathon = {
 
 	checkCares: function(str) {
 		var res = {};
+		console.log('hello');
 		var processedStr = str.toLowerCase().replace(/[^a-zA-Z0-9-]/g, " ");
 
 		var defaultCares = [this.washCares[0], this.dryCares[0], this.ironCares[0]];
@@ -457,3 +435,6 @@ var hackathon = {
 		return res;
 	},
 }
+
+var h = hackathon.retrieveAsinMaterialRelatedInfo();
+var p = processor.rateMaterials("jeans", h.materials);
