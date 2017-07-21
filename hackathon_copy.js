@@ -328,6 +328,18 @@ var processor = {
 		}
 		res.sort(compare);
 		return res;
+	},
+	
+	getFinalResult: function() {
+		var h = hackathon.retrieveAsinMaterialRelatedInfo();
+		var bars = this.rateMaterials(hackathon.getCategory(), h.materials);
+		var instruction = this.getCares(h.materials, h.cares);
+		var fabric = this.getFabricList(h.materials);
+		return {
+			'bars': bars,
+			'instruction': instruction,
+			'fabric': fabric
+		}
 	}
 }
 
