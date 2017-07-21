@@ -341,6 +341,10 @@ var hackathon = {
 	ironCares: ['Can Be Ironed', 'Ironing / Low Temperature', 'No Ironing'],
 	bleachCares: ['Do Not Bleach'],
 
+	getCategory: function() {
+		return '';
+	},
+	
 	retrieveAsinMaterialRelatedInfo: function(){
 		try {
 			var doms = document.getElementById(FEATURE_BULLETS_DIV).getElementsByTagName(FEATURE_LI_TAG);
@@ -435,6 +439,5 @@ var hackathon = {
 		return res;
 	},
 }
-
 var h = hackathon.retrieveAsinMaterialRelatedInfo();
 var p = processor.rateMaterials("jeans", h.materials);
