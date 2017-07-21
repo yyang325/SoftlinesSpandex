@@ -6,14 +6,10 @@ const MATERIAL_LIB = ['abaca','aba','acetate','acrylic fabric','acrylic','admira
 					'bicast leather','bonded leather','full-grain leather','nappa leather','patent leather','leather',
 					'denim',
 					];
-const WASH_LIB = [	
-					'machine wash',
-					'hand wash',
-					'dry clean',
-				];
 const MATERIAL_NA = 0;				
 
 var processor = {
+
 	cottonFamily: ['cotton', 'corduroy', 'denim', 'flannel', 'seersucker', 'terrycloth', 'velvet', 'active comfort denim','amercian pima cotton', 'biopolished cotton', 'combed cotton', 'egyptian cotton', 'liquid cotton', 'organic cotton', 'pima cotton', 'polished cotton', 'cotton voile', 'cotton lawn'],
 	silkFamily: ['silk', 'satin', 'china silk', 'pongee silk', 'silk satin', 'thai silk', 'tsumugi silk', 'tusseh silk', 'tussah silk'],
 	leatherFamily: ['leather', 'bicast leather', 'pu leather', 'bonded leather', 'full-grain leather', 'leathertte', 'nappa leather', 'patent leather'],
@@ -25,56 +21,89 @@ var processor = {
 	rayonFamily: ['rayon'],
 	spandexFamily: ['spandex', 'elastane', 'lycra'],
 
+	washCares: ['Machine Wash', 'Machine Wash / Cold Only', "No Machine Wash"],
+	dryCares: ['Tumble Dry', 'Tumble Dry / Low Temperature', 'Dry Clean'],
+	ironCares: ['Can Be Ironed', 'Ironing / Low Temperature', 'No Ironing'],
+	bleachCares: ['Do Not Bleach'],
+
+	careLinks: {
+		'Machine Wash': 'https://github.com/yyang325/SoftlinesSpandex/blob/master/icon/wh-washing.png',
+		'Machine Wash / Cold Only': 'https://github.com/yyang325/SoftlinesSpandex/blob/master/icon/wh-washing-30deg.png',
+		'No Machine Wash': 'https://github.com/yyang325/SoftlinesSpandex/blob/master/icon/wh-washing-not-allowed.png',
+
+		'Tumble Dry': 'https://github.com/yyang325/SoftlinesSpandex/blob/master/icon/wh-drying-tumble.png',
+		'Tumble Dry / Low Temperature': 'https://github.com/yyang325/SoftlinesSpandex/blob/master/icon/wh-drying-tumble-low-heat.png',
+		'Dry Clean': 'https://github.com/yyang325/SoftlinesSpandex/blob/master/icon/wh-drycleaning.png',
+		'Dry Clean Only': 'https://github.com/yyang325/SoftlinesSpandex/blob/master/icon/wh-drycleaning-p.png',
+
+		'Can Be Ironed': 'https://github.com/yyang325/SoftlinesSpandex/blob/master/icon/wh-ironing.png',
+		'Ironing / Low Temperature': 'https://github.com/yyang325/SoftlinesSpandex/blob/master/icon/wh-ironing-low.png',
+		'No Ironing': 'https://github.com/yyang325/SoftlinesSpandex/blob/master/icon/wh-drying-tumble-not-allowed.png',
+
+		'Can Bleach': 'https://github.com/yyang325/SoftlinesSpandex/blob/master/icon/wh-bleaching.png',
+		'Do Not Bleach': 'https://github.com/yyang325/SoftlinesSpandex/blob/master/icon/wh-bleaching-not-allowed.png'
+	},
+
+	fabricDescriptions: {
+		'silk': 'silk',
+		'leather': 'leather',
+		'wool': 'wool',
+		'nylon': 'nylon',
+		'acrylic': 'acrylic',
+		'modal': 'modal',
+		'polyester': 'polyester',
+		'rayon': 'rayon',
+		'spandex': 'spandex'
+	},
+
+	getScore: function(family, materials) {
+		var score = 0;
+		for(var i = 0; i < family.length; i++) {
+			if (family[i] in materials) {
+				score += parseInt(materials[family[i]]);
+			}
+		}
+		return score;
+	},
 	rateMaterials: function(category, materials) {
 		var ratings = [];
-		var elasticity = {"property": "Elasticity", "rating": "Regular"};
-		var breathability = {"property": "Breathability", "rating": "Regular"};
-		var durability = {"property": "Durability", "rating": "Regular"};
-		var smoothness = {"property": "Smoothness", "rating": "Regular"};
-		var warmth = {"property": "Warmth", "rating": "Regular"};
-		var waterproof = {"property": "Waterproof", "rating": "Regular"};
-		
-		function getScore(family, materials) {
-			var score = 0;
-			for(var i = 0; i < family.length; i++) {
-				if (family[i] in materials) {
-					score += parseInt(materials[family[i]]);
-				}
-			}
-			return score;
-		}
+		var elasticity = {"property": "Elasticity", "rating": "Regular", "index":1};
+		var breathability = {"property": "Breathability", "rating": "Regular", "index":1};
+		var durability = {"property": "Durability", "rating": "Regular", "index":1};
+		var smoothness = {"property": "Smoothness", "rating": "Regular", "index":1};
+		var warmth = {"property": "Warmth", "rating": "Regular", "index":1};
+		var waterproof = {"property": "Waterproof", "rating": "Regular", "index":1};
 
-		var	cottonFamilyScore = getScore(this.cottonFamily, materials);
-		var silkFamilyScore = getScore(this.silkFamily, materials);
-		var leatherFamilyScore = getScore(this.leatherFamily, materials);
-		var woolFamilyScore = getScore(this.woolFamily, materials);
-		var nylonFamilyScore = getScore(this.nylonFamily, materials);
-		var acrylicFamilyScore = getScore(this.acrylicFamily, materials);
-		var	modalFamilyScore = getScore(this.modalFamily, materials);
-		var polyesterFamilyScore = getScore(this.polyesterFamily, materials);
-		var rayonFamilyScore = getScore(this.rayonFamily, materials);
-		var spandexFamilyScore = getScore(this.spandexFamily, materials);
+		var	cottonFamilyScore = this.getScore(this.cottonFamily, materials);
+		var silkFamilyScore = this.getScore(this.silkFamily, materials);
+		var leatherFamilyScore = this.getScore(this.leatherFamily, materials);
+		var woolFamilyScore = this.getScore(this.woolFamily, materials);
+		var nylonFamilyScore = this.getScore(this.nylonFamily, materials);
+		var acrylicFamilyScore = this.getScore(this.acrylicFamily, materials);
+		var	modalFamilyScore = this.getScore(this.modalFamily, materials);
+		var polyesterFamilyScore = this.getScore(this.polyesterFamily, materials);
+		var rayonFamilyScore = this.getScore(this.rayonFamily, materials);
+		var spandexFamilyScore = this.getScore(this.spandexFamily, materials);
 
 		if (category == "jeans") {
 			if (spandexFamilyScore >= 2) {
 				elasticity["rating"] = "More";
+				elasticity["index"] = 2;
 			} else if (spandexFamilyScore == 0) {
 				elasticity["rating"] = "Less";
+				elasticity["index"] = 0;
 			}
 			ratings.push(elasticity);
 
 			var breathableScore = woolFamilyScore + cottonFamilyScore + modalFamilyScore + silkFamilyScore;
 			var unbreathableScore = nylonFamilyScore + polyesterFamilyScore + spandexFamilyScore + leatherFamilyScore + rayonFamilyScore;
 
-			console.log(woolFamilyScore);
-			console.log(cottonFamilyScore);
-			console.log(modalFamilyScore);
-			console.log(silkFamilyScore);
-
 			if (breathableScore >= 90) {
 				breathability["rating"] = "More";
+				breathability["index"] = 2;
 			} else if (unbreathableScore >= 50) {
 				breathability["rating"] = "Less";
+				breathability["index"] = 0;
 			}
 			ratings.push(breathability);
 
@@ -83,8 +112,10 @@ var processor = {
 
 			if (durableScore >= 50) {
 				durability["rating"] = "More";
+				durability["index"] = 2;
 			} else if (undurableScore >= 5) {
 				durability["rating"] = "Less";
+				durability["index"] = 0;
 			}
 			ratings.push(durability);
 		}
@@ -95,8 +126,10 @@ var processor = {
 
 			if (smoothScore >= 50) {
 				smoothness["rating"] = "More";
+				smoothness["index"] = 2;
 			} else if (unsmoothScore >= 50) {
 				smoothness["rating"] = "Less";
+				smoothness["index"] = 0;
 			}
 			ratings.push(smoothness);
 
@@ -105,15 +138,19 @@ var processor = {
 			
 			if (breathableScore >= 90) {
 				breathability["rating"] = "More";
+				breathability["index"] = 2;
 			} else if (unbreathableScore >= 50) {
 				breathability["rating"] = "Less";
+				breathability["index"] = 0;
 			}
 			ratings.push(breathability);
 
 			if (spandexFamilyScore >= 2) {
 				elasticity["rating"] = "More";
+				elasticity["index"] = 2;
 			} else if (spandexFamilyScore == 0) {
 				elasticity["rating"] = "Less";
+				elasticity["index"] = 0;
 			}
 			ratings.push(elasticity);
 		}
@@ -124,8 +161,10 @@ var processor = {
 
 			if (warmScore >= 50) {
 				warmth["rating"] = "More";
+				warmth["index"] = 2;
 			} else if (unwarmScore >= 50) {
-				unwarm["rating"] = "Less";
+				warmth["rating"] = "Less";
+				warmth["index"] = 0;
 			}
 			ratings.push(warmth);
 
@@ -134,28 +173,181 @@ var processor = {
 
 			if (waterproofScore >= 50) {
 				waterproof["rating"] = "More";
+				waterproof["index"] = 2;
 			} else if (nonWaterproofScore >= 50) {
 				nonWaterproofScore = "Less";
+				waterproof["index"] = 0;
 			}
 			ratings.push(waterproof);
+
+			var breathableScore = woolFamilyScore + cottonFamilyScore + modalFamilyScore + silkFamilyScore;
+			var unbreathableScore = nylonFamilyScore + polyesterFamilyScore + spandexFamilyScore + leatherFamilyScore + rayonFamilyScore;
+			
+			if (breathableScore >= 90) {
+				breathability["rating"] = "More";
+				breathability["index"] = 2;
+			} else if (unbreathableScore >= 50) {
+				breathability["rating"] = "Less";
+				breathability["index"] = 0;
+			}
+			ratings.push(breathability);
 		}
 		return ratings;
 	},
-	processCare: function() {
+	getCares: function(materials, cares) {
+		var leatherFamilyScore = this.getScore(this.leatherFamily, materials);
+		var woolFamilyScore = this.getScore(this.woolFamily, materials);
+		var nylonFamilyScore = this.getScore(this.nylonFamily, materials);
+		var	modalFamilyScore = this.getScore(this.modalFamily, materials);
+		var polyesterFamilyScore = this.getScore(this.polyesterFamily, materials);
+
+		if (leatherFamilyScore >= 30) {
+			cares['iron'] = ironCares[2];
+		}
+		if (woolFamilyScore >= 80) {
+			cares['dry'] = dryCares[2];
+		}
+		if (nylonFamilyScore >= 30) {
+			cares['wash'] = washCares[1];
+			cares['dry'] = dryCares[1];
+			cares['iron'] = ironCares[1];
+		}
+		if (modalFamilyScore >= 50) {
+			cares['dry'] = dryCares[1];
+			cares['bleach'] = bleachCares[0];
+		}
+		if (polyesterFamilyScore >= 50) {
+			cares['dry'] = dryCares[1];
+			cares['iron'] = ironCares[1];
+		}
+
+		var res = [];
+		var singleCare = {};
+		if ('wash' in cares) {
+			singleCare['iconLink'] = this.careLinks[cares['wash']];
+			singleCare['description'] = cares['wash'];
+			res.push(singleCare);
+
+		}
+
+		singleCare = {};
+		if ('dry' in cares) {
+			singleCare['iconLink'] = this.careLinks[cares['dry']];
+			singleCare['description'] = cares['dry'];
+			res.push(singleCare);
+
+		}
+
+		singleCare = {};
+		if ('iron' in cares) {
+			singleCare['iconLink'] = this.careLinks[cares['iron']];
+			singleCare['description'] = cares['iron'];
+			res.push(singleCare);
+		}
+
+		singleCare = {};
+		if ('bleach' in cares) {
+			singleCare['iconLink'] = this.careLinks[cares['bleach']];
+			singleCare['description'] = cares['bleach']
+			res.push(singleCare);
+		}
+		return res;
+	},
+
+	getFabricList: function(materials) {
+		var	cottonFamilyScore = this.getScore(this.cottonFamily, materials);
+		var silkFamilyScore = this.getScore(this.silkFamily, materials);
+		var leatherFamilyScore = this.getScore(this.leatherFamily, materials);
+		var woolFamilyScore = this.getScore(this.woolFamily, materials);
+		var nylonFamilyScore = this.getScore(this.nylonFamily, materials);
+		var acrylicFamilyScore = this.getScore(this.acrylicFamily, materials);
+		var	modalFamilyScore = this.getScore(this.modalFamily, materials);
+		var polyesterFamilyScore = this.getScore(this.polyesterFamily, materials);
+		var rayonFamilyScore = this.getScore(this.rayonFamily, materials);
+		var spandexFamilyScore = this.getScore(this.spandexFamily, materials);
+
+		function createFabric(family, familyScore, threshold, materials, fabricDescriptions) {
+			var fabric = {};
+			if (familyScore >= threshold) {
+				for(var i = 0; i < family.length; i++) {
+					if (family[i] in materials) {
+						fabric['type'] = family[i];
+						fabric['percentage'] = materials[family[i]];
+						fabric['description'] = fabricDescriptions[family[0]];
+					}
+				}
+			}
+			return fabric;
+		}
+
+		var res = [];
+		var createdFabric = createFabric(this.silkFamily, silkFamilyScore, 33, materials, this.fabricDescriptions);
+		console.log(createdFabric.length);
+		if (Object.keys(createdFabric).length != 0) {
+			res.push(createdFabric);
+		}
+		createdFabric = createFabric(this.leatherFamily, leatherFamilyScore, 33, materials, this.fabricDescriptions);
+		if (Object.keys(createdFabric).length != 0) {
+			res.push(createdFabric);
+		}
+		createdFabric = createFabric(this.woolFamily, woolFamilyScore, 33, materials, this.fabricDescriptions);
+		if (Object.keys(createdFabric).length != 0) {
+			res.push(createdFabric);
+		}
+		createdFabric = createFabric(this.nylonFamily, nylonFamilyScore, 33, materials, this.fabricDescriptions);
+		if (Object.keys(createdFabric).length != 0) {
+			res.push(createdFabric);
+		}
+		createdFabric = createFabric(this.acrylicFamily, acrylicFamilyScore, 33, materials, this.fabricDescriptions);
+		if (Object.keys(createdFabric).length != 0) {
+			res.push(createdFabric);
+		}
+		createdFabric = createFabric(this.modalFamily, modalFamilyScore, 33, materials, this.fabricDescriptions);
+		if (Object.keys(createdFabric).length != 0) {
+			res.push(createdFabric);
+		}
+		createdFabric = createFabric(this.polyesterFamily, polyesterFamilyScore, 33, materials, this.fabricDescriptions);
+		if (Object.keys(createdFabric).length != 0) {
+			res.push(createdFabric);
+		}
+		createdFabric = createFabric(this.rayonFamily, rayonFamilyScore, 33, materials, this.fabricDescriptions);
+		if (Object.keys(createdFabric).length != 0) {
+			res.push(createdFabric);
+		}
+		createdFabric = createFabric(this.spandexFamily, spandexFamilyScore, 1, materials, this.fabricDescriptions);
+		if (Object.keys(createdFabric).length != 0) {
+			res.push(createdFabric);
+		}
+
+		function compare(a,b) {
+			if (parseInt(a['percentage']) > parseInt(b['percentage']))
+				return -1;
+			if (parseInt(a['percentage']) < parseInt(b['percentage']))
+			  	return 1;
+			return 0;
+		}
+		res.sort(compare);
+		return res;
 	}
 }
 
 var hackathon = {
 	materials: {},
-	wash: {},
 	index: [],
+	cares: {},
+
+	washCares: ['Machine Wash', 'Machine Wash / Cold Only', "No Machine Wash"],
+	dryCares: ['Tumble Dry', 'Tumble Dry / Low Temperature', 'Dry Clean'],
+	ironCares: ['Can Be Ironed', 'Ironing / Low Temperature', 'No Ironing'],
+	bleachCares: ['Do Not Bleach'],
+
 	retrieveAsinMaterialRelatedInfo: function(){
 		try {
 			var doms = document.getElementById(FEATURE_BULLETS_DIV).getElementsByTagName(FEATURE_LI_TAG);
 			var features = [].slice.call(doms).map((dom, i) => {
 				var feature_text = dom.innerText;
 				var materialList = hackathon.checkMaterial(feature_text);
-				var washRes = hackathon.checkWash(feature_text);
+				var careRes = hackathon.checkCares(feature_text);
 
 				if(Object.keys(materialList).length > 0){
 					// this.materials = materialList;
@@ -168,8 +360,8 @@ var hackathon = {
 					this.index.push(i);
 				}
 
-				if(Object.keys(this.wash).length === 0 && Object.keys(washRes).length > 0){
-					this.wash = this.checkWash(feature_text);
+				if(Object.keys(this.cares).length === 0 && Object.keys(careRes).length > 0){
+					this.cares = this.checkCares(feature_text);
 				}
 			});
 		} catch (e) {
@@ -177,13 +369,15 @@ var hackathon = {
 		}		
 
 		return this.getProperties();
-	}, 
+	},
+
 	getProperties: function(){
 		return {
 			'materials': this.materials,
-			'washing': this.wash
+			'cares': this.cares
 		}
 	},
+
 	checkMaterial: function(str) {
 		var res = {};
 
@@ -206,20 +400,38 @@ var hackathon = {
 		}
 		return res;
 	},
-	checkWash: function(str) {
+
+	checkCares: function(str) {
 		var res = {};
-		str = str.toLowerCase().trim();
-		WASH_LIB.map((wash_key_word, i) => {
-			if(str.includes(wash_key_word)){
-				res['washing_instruction'] = str;
-				res['wash_type'] = wash_key_word;
-				if(str.includes('hot')){
-					res['water_temperature'] = 'hot';
-				}else if(str.includes('cold')) {
-					res['water_temperature'] = 'cold';
-				}
-			}
-		});
+		console.log('hello');
+		var processedStr = str.toLowerCase().replace(/[^a-zA-Z0-9-]/g, " ");
+
+		var defaultCares = [this.washCares[0], this.dryCares[0], this.ironCares[0]];
+
+		res['wash'] = defaultCares[0];
+		res['dry'] = defaultCares[1];
+		res['iron'] = defaultCares[2];
+
+		var noMachineWash = 'no machine wash';
+		var cold = 'cold';
+		var low = 'low'
+		var dryCleanOnly = 'dry clean only';
+		var dryWashOnly = 'dry wash only';
+		var noIroning = 'no ironing';
+
+		if (processedStr.includes(cold)) {
+			res['wash'] = this.washCares[1];
+		}
+		if (processedStr.includes(low)) {
+			res['dry'] = this.dryCares[1];
+		}
+		if (processedStr.includes(dryCleanOnly) || processedStr.includes(dryWashOnly)) {
+			res['wash'] = this.washCares[2];
+			res['dry'] = this.dryCares[2];
+		}
+		if (processedStr.includes(noIroning)) {
+			res['iron'] = this.ironCares[2];
+		}
 		return res;
 	},
 }
