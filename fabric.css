@@ -1,3 +1,8 @@
+.ui-button {
+	border:none;
+	background:none;
+}
+
 .ui-button .ui-icon {
 	background-image: url(https://code.jquery.com/ui/1.12.1/themes/base/images/ui-icons_777777_256x240.png);
 }
