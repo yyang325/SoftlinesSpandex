@@ -57,6 +57,7 @@ var processor = {
 	},
 
 	getScore: function(family, materials) {
+		console.log('getScroe method begin', family, materials);
 		var score = 0;
 		for(var i = 0; i < family.length; i++) {
 			if (family[i] in materials) {
@@ -206,23 +207,23 @@ var processor = {
 		var polyesterFamilyScore = this.getScore(this.polyesterFamily, materials);
 
 		if (leatherFamilyScore >= 30) {
-			cares['iron'] = ironCares[2];
+			cares['iron'] = this.ironCares[2];
 		}
 		if (woolFamilyScore >= 80) {
 			cares['dry'] = this.dryCares[2];
 		}
 		if (nylonFamilyScore >= 30) {
-			cares['wash'] = washCares[1];
+			cares['wash'] = this.washCares[1];
 			cares['dry'] = this.dryCares[1];
-			cares['iron'] = ironCares[1];
+			cares['iron'] = this.ironCares[1];
 		}
 		if (modalFamilyScore >= 50) {
 			cares['dry'] = this.dryCares[1];
-			cares['bleach'] = bleachCares[0];
+			cares['bleach'] = this.bleachCares[0];
 		}
 		if (polyesterFamilyScore >= 50) {
 			cares['dry'] = this.dryCares[1];
-			cares['iron'] = ironCares[1];
+			cares['iron'] = this.ironCares[1];
 		}
 
 		var res = [];
