@@ -43,6 +43,28 @@
         return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
     }
 
+    //return an sorted array of objects
+    function sortObject(obj) {
+        var value_arr = Object.values(obj).sort().reverse();
+        var key_arr = Object.keys(obj);
+        console.log('values sorted as:', value_arr);
+        var set = new Set();
+        var res = [];
+        for(var i = 0; i < value_arr.length; i++){
+            for(var j = 0; j < key_arr.length; j++){
+                var key = key_arr[j];
+                var value = value_arr[i];
+                if(set.has(key) || obj[key] != value_arr[i]) continue;
+                set.add(key);
+                var newobj = {};
+                newobj[key] = value;
+                res.push(newobj);
+            }
+        }
+        console.log(res);
+        return res;
+    }
+
 
     $("body").append(GM_getResourceText("dialog"));
     GM_addStyle(GM_getResourceText("styleJQUI")); 
@@ -52,15 +74,18 @@
 
     /* is frabic with number, display */
     var material_list = '';
-    Object.keys(materials).map((m) => {
+    sortObject(materials).map((item) => {
         var temp = '';
-        if(materials[m] > 0){
-            temp = m + ' ' + materials[m] + '%;  ';
+        var key = Object.keys(item)[0];
+        var value = item[key];
+        if(value > 0) {
+            temp = key + ' ' + value + '%; ';
         } else {
-            temp = m + '; ';
+            temp = key + '; ';
         }
         material_list += temp;
     });
+
     //if frabic with number delete related bullet
     if(isFrabicWithNumber) {
         console.log('removing index', hackathon.index);
