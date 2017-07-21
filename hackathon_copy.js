@@ -452,4 +452,3 @@ var hackathon = {
 }
 var h = hackathon.retrieveAsinMaterialRelatedInfo();
 var p = processor.rateMaterials("jeans", h.materials);
-hackathon.getCategory();
