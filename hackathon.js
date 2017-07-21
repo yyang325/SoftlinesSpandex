@@ -6,7 +6,7 @@ const MATERIAL_LIB = ['abaca','aba','acetate','acrylic fabric','acrylic','admira
 					'bicast leather','bonded leather','full-grain leather','nappa leather','patent leather','leather',
 					'denim',
 					];
-const MATERIAL_NA = 0;				
+const MATERIAL_NA = 0;	
 
 var processor = {
 
@@ -372,9 +372,15 @@ var hackathon = {
 				var materialList = hackathon.checkMaterial(feature_text);
 				var careRes = hackathon.checkCares(feature_text);
 
-				if(Object.keys(this.materials).length === 0 && Object.keys(materialList).length > 0){
-					this.materials = materialList;
-					this.index = i;
+				if(Object.keys(materialList).length > 0){
+					// this.materials = materialList;
+					Object.keys(materialList).map((key) => {
+						//if this.materials contains key already, check if it has number
+						if(!this.materials[key] || this.materials[key] === 0){
+							this.materials[key] = materialList[key];
+						}
+					});
+					this.index.push(i);
 				}
 
 				if(Object.keys(this.cares).length === 0 && Object.keys(careRes).length > 0){
