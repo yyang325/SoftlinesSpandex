@@ -197,7 +197,7 @@ var processor = {
 	},
 	getCares: function(materials, cares) {
 		console.log('this is get care method in processor object', materials, cares);
-		// console.log('dryCares is', dryCares, '\nthis.dryCares is', this.dryCares);
+		console.log('this.dryCares is', this.dryCares);
 		var leatherFamilyScore = this.getScore(this.leatherFamily, materials);
 		var woolFamilyScore = this.getScore(this.woolFamily, materials);
 		var nylonFamilyScore = this.getScore(this.nylonFamily, materials);
