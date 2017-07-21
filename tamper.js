@@ -23,6 +23,9 @@
     };
     console.log('hackathon object:', hackathon);
 
+    // dummy json
+    var obj = JSON.parse('{ "bars": [ { "property": "Breathability", "rating": "Less" }, { "property": "Elasticity", "rating": "Regular" }, { "property": "Durability", "rating": "More" } ], "instruction": [ { "iconLink": "https://raw.githubusercontent.com/c4leixub/SoftlinesSpandex/master/icon/wh-drying-tumble.png", "description": "Tumble Dry Normal" }, { "iconLink": "https://raw.githubusercontent.com/c4leixub/SoftlinesSpandex/master/icon/wh-washing-30deg-alt.png", "description": "Machine Wash Normal / Cold" }, { "iconLink": "https://raw.githubusercontent.com/c4leixub/SoftlinesSpandex/master/icon/wh-ironing.png", "description": "Iron Any Temperature" }, { "iconLink": "https://raw.githubusercontent.com/c4leixub/SoftlinesSpandex/master/icon/wh-bleaching-not-allowed.png", "description": "Do Not Bleach" } ], "fabric": [ { "type": "Cotton", "percentage": "98", "description": "Cotton can be ironed at relatively high temperatures" }, { "type": "Spandex", "percentage": "2", "description": "A lightweight synthetic fiber that is used to make stretchable clothing such as sportswear" } ] }');
+
     var isFrabicWithNumber = false;
     var materials = hackathon.retrieveAsinMaterialRelatedInfo()['materials'];
     console.log('materials are:', materials);
@@ -68,35 +71,42 @@
     $( "#dialog" ).dialog({
         autoOpen: false,
         width:750,
-        height:250,
+        height:350,
         resizable:false
     });
 
-    $( "#durabilityBar" ).progressbar({
-        value: 20
-    });
+    // The bar
+    var itemId = ["#itemOne", "#itemTwo", "#itemThree"];
+    var bars = obj.bars;
+    var i;
+    for (i = 0; i < bars.length; i++) {
+        // log(bars[i]);
+        $(itemId[i]).html(bars[i].property);
+    }
 
-    $( "#durabilityBar" ).progressbar({
-        value: 50
-    });
-    $( "#breathabilityBar" ).progressbar({
-        value: 80
-    });
-    $( "#flexabilityBar" ).progressbar({
-        value: 100
-    });
-    $( "#softnessBar" ).progressbar({
-        value: 60
-    });
-    $( "#weightBar" ).progressbar({
-        value: 30
-    });
-
+    // Wash instruction
+    var instruction = obj.instruction;
+    log(i);
+    log(instruction);
+    for (i = 0; i < instruction.length; i++) {
+        $("#img"+(i+1)).attr("src",instruction[i].iconLink);
+        //log($("#desc"+(i+1)));
+        $("#desc"+(i+1)).html(instruction[i].description);
+    }
+    
+        
+    // Fabric
+    var instructionDiv = $("#instruction"), fabric = obj.fabric, html='';
+    for (i = 0; i < fabric.length; i++) {
+        // instructionDiv.append("<div>" + fabric[i].type + " " + fabric[i].percentage + " " + fabric[i].description + "</div>");
+        html = '<div class="block"> <div class="fabricType"> <span class="fabricTypeText">' + fabric[i].type + " " + fabric[i].percentage + '%</span> </div> <div class="fabricDesc"> <span class="fabricDescText">' + fabric[i].description + '</span> </div> </div>';
+        instructionDiv.append(html);
+    }
+    
+    
     $( "#fabricLink" ).on( "click", function() {
         log("test");
         $( "#dialog" ).dialog( "open" );
     });
-
-
 }
 )();
