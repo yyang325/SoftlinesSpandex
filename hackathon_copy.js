@@ -342,7 +342,7 @@ var hackathon = {
 	bleachCares: ['Do Not Bleach'],
 
 	getCategory: function() {
-		console.log(document.getElementById('breadcrumb-back-link'));
+		window.console.log("dsfasdfasdf" + document.getElementById('breadcrumb-back-link'));
 		return '';
 	},
 	
