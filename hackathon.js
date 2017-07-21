@@ -225,6 +225,7 @@ var processor = {
 			cares['dry'] = this.dryCares[1];
 			cares['iron'] = this.ironCares[1];
 		}
+		console.log('check score finished');
 
 		var res = [];
 		var singleCare = {};
@@ -234,7 +235,7 @@ var processor = {
 			res.push(singleCare);
 
 		}
-
+		console.log('singleCare 1');
 		singleCare = {};
 		if ('dry' in cares) {
 			singleCare['iconLink'] = this.careLinks[cares['dry']];
@@ -242,14 +243,14 @@ var processor = {
 			res.push(singleCare);
 
 		}
-
+console.log('singleCare 2');
 		singleCare = {};
 		if ('iron' in cares) {
 			singleCare['iconLink'] = this.careLinks[cares['iron']];
 			singleCare['description'] = cares['iron'];
 			res.push(singleCare);
 		}
-
+console.log('singleCare 3');
 		singleCare = {};
 		if ('bleach' in cares) {
 			singleCare['iconLink'] = this.careLinks[cares['bleach']];
